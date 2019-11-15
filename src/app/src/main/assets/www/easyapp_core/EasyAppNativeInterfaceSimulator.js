@@ -6,7 +6,7 @@ if(typeof EasyAppNativeInterface=="undefined") {
                 return "EasyApp Simulator";
             }
             static __frameworkVersion() {
-                return "0.0.11alpha";
+                return "0.0.20alpha";
             }
             static __requestCameraPhoto(callbackResolve, callbackReject) {
                 Bridge.callbackCameraResolve = callbackResolve;

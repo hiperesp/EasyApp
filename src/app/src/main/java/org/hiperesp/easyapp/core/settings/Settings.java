@@ -10,7 +10,7 @@ public class Settings {
     public static void init(){
         projectTitle = "EasyApp Development App";
         indexPath = "file:///android_asset/www/index.html";
-        frameworkVersion = "0.0.11alpha";
+        frameworkVersion = "0.0.20alpha";
         frameworkName = "EasyApp";
     }
 }
