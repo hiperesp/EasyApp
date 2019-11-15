@@ -1,17 +1,23 @@
 if(typeof EasyAppNativeInterface=="undefined") {
     var EasyAppNativeInterface;
     (()=>{
-        EasyAppNativeInterface = {
-            __frameworkName: () => "EasyApp Simulator",
-            __frameworkVersion: () => "0.0.11alpha",
-            __requestCameraPhoto: (callbackResolve, callbackReject) => {
+        EasyAppNativeInterface = class {
+            static __frameworkName() {
+                return "EasyApp Simulator";
+            }
+            static __frameworkVersion() {
+                return "0.0.11alpha";
+            }
+            static __requestCameraPhoto(callbackResolve, callbackReject) {
                 Bridge.callbackCameraResolve = callbackResolve;
                 Bridge.callbackCameraReject = callbackReject;
                 NativeCaller.requestCameraPhoto();
-            },
-            __getCallbackId: () => Bridge.getCallbackId(),
+            }
+            static __getCallbackId() {
+                return Bridge.getCallbackId();
+            }
         };
-        let Bridge = class {
+        class Bridge {
             static callbackCameraResolve = "";
             static callbackCameraReject = "";
             static sendScriptToWeb(script) {
@@ -21,21 +27,34 @@ if(typeof EasyAppNativeInterface=="undefined") {
             static getCallbackId(){
                 return this.__uniqueCallbackId++;
             }
-            static callbackCameraFunction(success, data){
-                let callbackFunction;
+            static callbackCameraFunction(success, data, response){
+                let callbackCall;
                 if(success) {
-                    callbackFunction = this.callbackCameraResolve;
+                    callbackCall = this.callbackCameraResolve+"(\""+data+"\");";
                 } else {
-                    callbackFunction = this.callbackCameraReject;
+                    callbackCall = this.callbackCameraReject+"("+response+");";
                 }
-                this.sendScriptToWeb("window."+"EasyAppNativeInterface"+".__private.callback."+callbackFunction+"(\""+data+"\")");
+                this.sendScriptToWeb("window.EasyAppNativeInterface.__private.callback."+callbackCall);
             }
         };
-        let IntentRequestCodeConstants = class {
+        class Manifest {
+            static permission = {
+                CAMERA: "android.permission.CAMERA",
+            }
+            static permissionTextAction = {
+                "android.permission.CAMERA": "tire fotos e grave vídeos"
+            }
+        };
+        class ResponseProtocolConstants {
+            static FAILED_USER_CANCELLED = -2;
+            static PERMISSION_DENIED = -1;
+            static SUCCESS = 0;
+        };
+        class IntentRequestCodeConstants extends ResponseProtocolConstants {
             static CAMERA_REQUEST = 1888;
             static CAMERA_PERMISSION_CODE = 100;
         };
-        let NativeCaller = class extends IntentRequestCodeConstants {
+        class NativeCaller extends IntentRequestCodeConstants {
             static requestCameraPhoto(){
                 if (!Native.checkPermission(Manifest.permission.CAMERA)) {
                     Native.requestPermissions([Manifest.permission.CAMERA], this.CAMERA_PERMISSION_CODE);
@@ -49,7 +68,7 @@ if(typeof EasyAppNativeInterface=="undefined") {
                     if (grantResults[0]) {
                         this.startCameraIntent();
                     } else {
-                        Bridge.callbackCameraFunction(false, "Permission denied");
+                        Bridge.callbackCameraFunction(false, "", this.PERMISSION_DENIED);
                     }
                 }
             }
@@ -70,14 +89,15 @@ if(typeof EasyAppNativeInterface=="undefined") {
             static onActivityResult(requestCode, resultCode, data) {
                 if (requestCode == this.CAMERA_REQUEST) {
                     if(resultCode) {
-                        Bridge.callbackCameraFunction(true, data);
+                        Bridge.callbackCameraFunction(true, data, this.SUCCESS);
                     } else {
-                        Bridge.callbackCameraFunction(false, "Failed");
+                        Bridge.callbackCameraFunction(false, "", this.FAILED_USER_CANCELLED);
                     }
                 }
             }
         };
-        let Native = class {
+
+        class Native {
             static userPermissions = [];
             static addUserPermission(permission) {
                 this.userPermissions.push(permission);
@@ -97,14 +117,6 @@ if(typeof EasyAppNativeInterface=="undefined") {
                 }
                 NativeCaller.onRequestPermissionsResult(permission_code, permissions, grantResults);
             }
-        };
-        let Manifest = {
-            permission: {
-                CAMERA: "android.permission.CAMERA",
-            },
-            permissionTextAction: {
-                "android.permission.CAMERA": "tire fotos e grave vídeos"
-            },
         };
     })();
 }

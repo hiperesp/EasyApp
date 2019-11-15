@@ -12,16 +12,9 @@ class Bridge implements IntentRequestCodeConstants {
     EasyApp easyApp;
     private WebView webView;
 
-    String callbackCameraResolve = "";
-    String callbackCameraReject = "";
-
     Bridge(EasyApp easyApp, WebView webView) {
         this.easyApp = easyApp;
         this.webView = webView;
-    }
-
-    private void sendScriptToWeb(String script) {
-        webView.evaluateJavascript(script, null);
     }
 
     private int uniqueCallbackId = 0;
@@ -30,14 +23,20 @@ class Bridge implements IntentRequestCodeConstants {
         return uniqueCallbackId++;
     }
 
+    private void sendScriptToWeb(String script) {
+        webView.evaluateJavascript(script, null);
+    }
 
-    public void callbackCameraFunction(boolean success, String data){
-        String callbackFunction;
+
+    String callbackCameraResolve = "";
+    String callbackCameraReject = "";
+    public void callbackCameraFunction(boolean success, String data, int response){
+        String callbackCall;
         if(success) {
-            callbackFunction = callbackCameraResolve;
+            callbackCall = callbackCameraResolve+"(\""+data+"\");";
         } else {
-            callbackFunction = callbackCameraReject;
+            callbackCall = callbackCameraReject+"("+response+");";
         }
-        sendScriptToWeb("window."+ Settings.EASYAPP_NATIVE_INTERFACE+".__private.callback."+callbackFunction+"(\""+data+"\")");
+        sendScriptToWeb("window."+ Settings.EASYAPP_NATIVE_INTERFACE+".__private.callback."+callbackCall);
     }
 }

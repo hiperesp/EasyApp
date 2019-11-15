@@ -11,7 +11,7 @@ import org.hiperesp.easyapp.MainActivity;
 import org.hiperesp.easyapp.core.js_bridge.BridgeWebInterface;
 import java.io.ByteArrayOutputStream;
 
-public class NativeCaller implements IntentRequestCodeConstants {
+public class NativeCaller implements IntentRequestCodeConstants, ResponseProtocolConstants {
 
     private MainActivity activity;
     private BridgeWebInterface bridgeWebInterface;
@@ -35,7 +35,7 @@ public class NativeCaller implements IntentRequestCodeConstants {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCameraIntent();
             } else {
-                bridgeWebInterface.callbackCameraFunction(false, "Permission denied");
+                bridgeWebInterface.callbackCameraFunction(false, null, PERMISSION_DENIED);
             }
         }
     }
@@ -54,9 +54,9 @@ public class NativeCaller implements IntentRequestCodeConstants {
                 photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 String imageBase64Data = Base64.encodeToString(byteArray, Base64.NO_WRAP);
-                bridgeWebInterface.callbackCameraFunction(true, imageBase64Data);
+                bridgeWebInterface.callbackCameraFunction(true, imageBase64Data, SUCCESS);
             } else {
-                bridgeWebInterface.callbackCameraFunction(false, "Failed");
+                bridgeWebInterface.callbackCameraFunction(false, null, FAILED_USER_CANCELLED);
             }
         }
     }
