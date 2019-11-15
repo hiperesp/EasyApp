@@ -43,7 +43,7 @@ public class EasyApp {
     }
     private void addJavascriptInterface(){
         bridgeWebInterface = new BridgeWebInterface(this, webView);
-        webView.addJavascriptInterface(bridgeWebInterface, Settings.easyAppNativeInterface);
+        webView.addJavascriptInterface(bridgeWebInterface, Settings.EASYAPP_NATIVE_INTERFACE);
         setPermissionManager();
     }
     private void setPermissionManager(){
@@ -60,4 +60,13 @@ public class EasyApp {
         webView.loadUrl(Settings.indexPath);
     }
 
+    public boolean onBackPressed(){
+        if(Settings.backButtonActionToWebView) {
+            if (webView.canGoBack()) {
+                webView.goBack();
+                return true;
+            }
+        }
+        return false;
+    }
 }

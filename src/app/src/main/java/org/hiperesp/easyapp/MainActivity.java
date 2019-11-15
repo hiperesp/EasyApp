@@ -25,14 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void init(){
         Settings.init();
-        setThemeColor();
+        setDefaultFlags();
         easyApp = new EasyApp(this, (WebView) findViewById(R.id.mainWebView));
     }
 
-    private void setThemeColor(){
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    private void setDefaultFlags(){
+        //Window window = getWindow();
+        //window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     @Override
@@ -45,5 +44,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         easyApp.nativeCaller.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!easyApp.onBackPressed()){
+            super.onBackPressed();
+        }
     }
 }
