@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+        <title>Onde será que isso aqui vai aparecer? Acho que em lugar nenhum...</title>
+        <script type="application/javascript" src="../easyapp_core/EasyAppNativeInterfaceSimulator.js"></script>
+        <script type="application/javascript" src="../easyapp_core/EasyAppNativeInterfacePrivate.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>Nome do framework</h1>
+            <p id="frameworkName">abc</p>
+        </div>
+        <div>
+            <h1>Versão do framework</h1>
+            <p id="frameworkVersion">def</p>
+        </div>
+        <div>
+            <h1>Foto da câmera</h1>
+            <img id="photo" src=""><br>
+            <a href="camera.html">Camera example</a>
+            <button id="takePhoto">Photo</button>
+        </div>
+        <script>
+var frameworkName = document.querySelector("#frameworkName");
+var frameworkVersion = document.querySelector("#frameworkVersion");
+var photo = document.querySelector("#photo");
+var takePhotoButton = document.querySelector("#takePhoto");
+
+frameworkName.textContent = EasyAppNativeInterface.__frameworkName();
+frameworkVersion.textContent = EasyAppNativeInterface.__frameworkVersion();
+
+takePhotoButton.addEventListener("click", function(e){
+    EasyAppNativeInterface.requestCameraPhoto()
+    .then((data) => photo.src = "data:image/png;base64,"+data)
+    .catch((error) => alert(error));
+});
+        </script>
+    </body>
+</html>
