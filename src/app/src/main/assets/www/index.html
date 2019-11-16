@@ -10,11 +10,11 @@
     <body>
         <div>
             <h1>Nome do framework</h1>
-            <p id="frameworkName">abc</p>
+            <p id="frameworkName"></p>
         </div>
         <div>
             <h1>Versão do framework</h1>
-            <p id="frameworkVersion">def</p>
+            <p id="frameworkVersion"></p>
         </div>
         <div>
             <h1>Foto da câmera</h1>
@@ -33,8 +33,17 @@ frameworkVersion.textContent = EasyAppNativeInterface.__frameworkVersion();
 
 takePhotoButton.addEventListener("click", function(e){
     EasyAppNativeInterface.requestCameraPhoto()
-    .then((data) => photo.src = "data:image/png;base64,"+data)
-    .catch((error) => alert(error));
+    .then((data) => {
+        let img = document.createElement("img")
+        img.src = "data:image/png;base64,"+data
+        document.querySelector("body").appendChild(img)
+    })
+    .catch((error) => {
+        if(error==-1)
+            alert("Você negou a permissão")
+        else if(error==-2)
+            alert("Você cancelou a foto")
+    });
 });
         </script>
     </body>
