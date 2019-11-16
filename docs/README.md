@@ -82,7 +82,8 @@ Exemplo de câmera.
 
 Esse exemplo é caso o app precise de uma foto do usuário.
 
-> EasyAppNativeInterface.requestCameraPhoto()\
+```
+EasyAppNativeInterface.requestCameraPhoto()\
 .then((data) => {\
     let img = document.createElement("img")\
 	img.src = "data:image/png;base64,"+data\
@@ -94,6 +95,7 @@ Esse exemplo é caso o app precise de uma foto do usuário.
 	else if(error==-2)\
 		alert("Você cancelou a foto")\
 });
+```
 
 #### Atenção:
 
