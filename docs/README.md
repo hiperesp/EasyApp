@@ -83,17 +83,17 @@ Exemplo de câmera.
 Esse exemplo é caso o app precise de uma foto do usuário.
 
 ```
-EasyAppNativeInterface.requestCameraPhoto()\
-.then((data) => {\
-    let img = document.createElement("img")\
-	img.src = "data:image/png;base64,"+data\
-	document.querySelector("body").appendChild(img)\
-})\
-.catch((error) => {\
-	if(error==-1)\
-		alert("Você negou a permissão")\
-	else if(error==-2)\
-		alert("Você cancelou a foto")\
+EasyAppNativeInterface.requestCameraPhoto()
+.then((data) => {
+    let img = document.createElement("img")
+	img.src = "data:image/png;base64,"+data
+	document.querySelector("body").appendChild(img)
+})
+.catch((error) => {
+	if(error==-1)
+		alert("Você negou a permissão")
+	else if(error==-2)
+		alert("Você cancelou a foto")
 });
 ```
 
