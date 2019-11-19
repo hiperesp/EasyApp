@@ -32,7 +32,7 @@ public class EasyApp {
         setChromeClient();
         setWebViewClient();
         enableDebugging();
-        enableJavascript();
+        enableFeatures();
         addJavascriptInterface();
     }
     private void setChromeClient(){
@@ -50,8 +50,9 @@ public class EasyApp {
         nativeCaller = new NativeCaller(activity, bridgeWebInterface);
     }
     @SuppressLint("SetJavaScriptEnabled")
-    private void enableJavascript(){
+    private void enableFeatures(){
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDatabaseEnabled(true);
     }
     private void enableDebugging() {
         WebView.setWebContentsDebuggingEnabled(true);

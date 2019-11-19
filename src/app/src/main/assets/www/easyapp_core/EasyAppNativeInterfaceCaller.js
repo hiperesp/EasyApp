@@ -13,6 +13,11 @@ EasyAppNativeInterface.__private = {
         });
     }
 };
+EasyAppNativeInterface.responseProtocolConstants = {
+    FAILED_USER_CANCELLED: -2,
+    PERMISSION_DENIED: -1,
+    SUCCESS: 0,
+}
 EasyAppNativeInterface.requestCameraPhoto = async () => {
     return EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__requestCameraPhoto);
 }

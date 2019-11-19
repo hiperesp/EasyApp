@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <title>Onde será que isso aqui vai aparecer? Acho que em lugar nenhum...</title>
+        <title>EasyApp - Camera</title>
         <script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceSimulator.js"></script>
         <script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceCaller.js"></script>
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -16,7 +16,13 @@ var button = document.querySelector("#takePhoto");
 button.addEventListener("click", function(e){
     EasyAppNativeInterface.requestCameraPhoto()
     .then((data) => photo.src = "data:image/png;base64,"+data)
-    .catch((error) => alert(error));
+    .catch((error) => {
+        if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
+            alert("Você cancelou a foto :(");
+        } else if(error==EasyAppNativeInterface.responseProtocolConstants.PERMISSION_DENIED) {
+            alert("Permissão negada :(");
+        }
+    });
 });
         </script>
     </body>

@@ -78,7 +78,25 @@ Para incluir chamadas nativas utilizando um código mais limpo, você pode inclu
 
 ### Câmera
 
-Exemplo de câmera.
+#### Docs
+
+```
+EasyAppNativeInterface.requestCameraPhoto(void): Promise(
+    executor: function(
+        resolve: function(base64PngImage: string),
+        reject: function(error: int)
+    )
+)
+```
+
+A string base64PngImage representa a imagem obtida através da câmera do usuário. Ela é uma string codificada em base64, em PNG.
+
+O int error representa o erro que ocorreu ao tentar obter uma imagem através da câmera do usuário.
+Ela pode ser -1, caso a permissão foi negada, ou -2, caso o usuário cancele a operação.
+Você pode comparar com as constantes do objeto EasyAppNativeInterface.responseProtocolConstants,
+utilizando os atributos FAILED_USER_CANCELLED (equivalente a -2) e PERMISSION_DENIED (equivalente a -1).
+
+#### Exemplo de câmera.
 
 Esse exemplo é caso o app precise de uma foto do usuário.
 
@@ -86,14 +104,14 @@ Esse exemplo é caso o app precise de uma foto do usuário.
 EasyAppNativeInterface.requestCameraPhoto()
 .then((data) => {
     let img = document.createElement("img")
-	img.src = "data:image/png;base64,"+data
-	document.querySelector("body").appendChild(img)
+    img.src = "data:image/png;base64,"+data
+    document.querySelector("body").appendChild(img)
 })
 .catch((error) => {
-	if(error==-1)
-		alert("Você negou a permissão")
-	else if(error==-2)
-		alert("Você cancelou a foto")
+    if(error==-1)
+        alert("Você negou a permissão")
+    else if(error==-2)
+        alert("Você cancelou a foto")
 });
 ```
 

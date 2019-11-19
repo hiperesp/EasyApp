@@ -2,20 +2,15 @@ if(typeof EasyAppNativeInterface=="undefined") {
     var EasyAppNativeInterface;
     (()=>{
         EasyAppNativeInterface = class {
-            static __frameworkName() {
-                return "EasyApp Simulator";
-            }
-            static __frameworkVersion() {
-                return "0.0.20alpha";
-            }
+            static __frameworkName() { return "EasyApp Simulator"; }
+            static __frameworkVersion() { return "0.0.20alpha";  }
+            static __platformName() { return "Simulator"; }
             static __requestCameraPhoto(callbackResolve, callbackReject) {
                 Bridge.callbackCameraResolve = callbackResolve;
                 Bridge.callbackCameraReject = callbackReject;
                 NativeCaller.requestCameraPhoto();
             }
-            static __getCallbackId() {
-                return Bridge.getCallbackId();
-            }
+            static __getCallbackId() { return Bridge.getCallbackId(); }
         };
         class Bridge {
             static callbackCameraResolve = "";

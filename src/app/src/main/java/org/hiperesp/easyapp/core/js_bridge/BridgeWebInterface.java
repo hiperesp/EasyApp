@@ -6,18 +6,14 @@ import org.hiperesp.easyapp.core.EasyApp;
 import org.hiperesp.easyapp.core.settings.Settings;
 
 public class BridgeWebInterface extends Bridge {
-    public BridgeWebInterface(EasyApp easyApp, WebView webView) {
-        super(easyApp, webView);
-    }
+    public BridgeWebInterface(EasyApp easyApp, WebView webView) { super(easyApp, webView); }
 
     @JavascriptInterface
-    public String __frameworkName(){
-        return Settings.frameworkName;
-    }
+    public String __frameworkName(){ return Settings.frameworkName; }
     @JavascriptInterface
-    public String __frameworkVersion(){
-        return Settings.frameworkVersion;
-    }
+    public String __frameworkVersion(){ return Settings.frameworkVersion; }
+    @JavascriptInterface
+    public String __getPlatform() { return Settings.platformName; }
     @JavascriptInterface
     public void __requestCameraPhoto(String callbackResolve, String callbackReject){
         callbackCameraResolve = callbackResolve;
