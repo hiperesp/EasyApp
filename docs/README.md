@@ -108,9 +108,9 @@ EasyAppNativeInterface.requestCameraPhoto()
     document.querySelector("body").appendChild(img)
 })
 .catch((error) => {
-    if(error==-1)
+    if(error==EasyAppNativeInterface.responseProtocolConstants.PERMISSION_DENIED) //error==-1
         alert("Você negou a permissão")
-    else if(error==-2)
+    else if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) //error==-2
         alert("Você cancelou a foto")
 });
 ```
