@@ -15,10 +15,8 @@ public class BridgeWebInterface extends Bridge {
     @JavascriptInterface
     public String __getPlatform() { return Settings.platformName; }
     @JavascriptInterface
-    public void __requestCameraPhoto(String callbackResolve, String callbackReject){
-        callbackCameraResolve = callbackResolve;
-        callbackCameraReject = callbackReject;
-        easyApp.nativeCaller.requestCameraPhoto();
-    }
+    public void __requestCameraPhoto(String resolve, String reject){ easyApp.nativeCaller.requestCameraPhoto(resolve, reject); }
+    @JavascriptInterface
+    public void __makeToast(String resolve, String reject, String text, boolean isShort){ easyApp.nativeCaller.makeToast(resolve, reject, text, isShort); }
 
 }

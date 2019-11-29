@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+        <title>EasyApp - Toast</title>
+        <script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceSimulator.js"></script>
+        <script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceCaller.js"></script>
+    </head>
+    <body>
+        <input id="text" type="text" placeholder="Texto do toast"><br>
+        <label>
+            <input style="display:none;" id="isShort" type="checkbox">
+            <span id="isShortText"></span>
+        </label><br>
+        <button id="makeToast">Criar Toast</button>
+        <script>
+var text = document.querySelector("#text");
+var isShort = document.querySelector("#isShort");
+var isShortText = document.querySelector("#isShortText");
+isShort.addEventListener("change", function(e) {
+    isShortText.textContent = isShort.checked?"Curto":"Longo";
+    isShortText.textContent+= "(clique para altenar)";
+});
+isShort.dispatchEvent(new Event("change"));
+var button = document.querySelector("#makeToast");
+button.addEventListener("click", function(e){
+    EasyAppNativeInterface.makeToast(text.value, isShort.checked)
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
+});
+        </script>
+    </body>
+</html>

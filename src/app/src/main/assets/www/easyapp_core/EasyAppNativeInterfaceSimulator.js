@@ -3,7 +3,7 @@ if(typeof EasyAppNativeInterface=="undefined") {
     (()=>{
         EasyAppNativeInterface = class {
             static __frameworkName() { return "EasyApp Simulator"; }
-            static __frameworkVersion() { return "0.0.20alpha";  }
+            static __frameworkVersion() { return "0.0.21alpha";  }
             static __platformName() { return "Simulator"; }
             static __requestCameraPhoto(callbackResolve, callbackReject) {
                 Bridge.callbackCameraResolve = callbackResolve;

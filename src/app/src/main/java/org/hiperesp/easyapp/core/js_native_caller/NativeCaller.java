@@ -1,63 +1,54 @@
 package org.hiperesp.easyapp.core.js_native_caller;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.util.Base64;
 import androidx.annotation.NonNull;
 import org.hiperesp.easyapp.MainActivity;
 import org.hiperesp.easyapp.core.js_bridge.BridgeWebInterface;
-import java.io.ByteArrayOutputStream;
+import org.hiperesp.easyapp.core.native_functions.Camera;
+import org.hiperesp.easyapp.core.native_functions.Native;
+import org.hiperesp.easyapp.core.native_functions.Toast;
 
-public class NativeCaller implements IntentRequestCodeConstants, ResponseProtocolConstants {
+import java.util.ArrayList;
+
+public class NativeCaller {
 
     private MainActivity activity;
     private BridgeWebInterface bridgeWebInterface;
+
+    private int uniqueInt = 0;
 
     public NativeCaller(MainActivity activity, BridgeWebInterface bridgeWebInterface) {
         this.activity = activity;
         this.bridgeWebInterface = bridgeWebInterface;
     }
 
-    public void requestCameraPhoto(){
-        if (activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            activity.requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-        } else {
-            startCameraIntent();
-        }
+    private ArrayList<Native> aNatives = new ArrayList<Native>();
+
+    public void requestCameraPhoto(String resolve, String reject){
+        Camera camera = new Camera(resolve, reject, activity, bridgeWebInterface, getUniqueInt());
+        aNatives.add(camera);
+        camera.start();
+    }
+    public void makeToast(String resolve, String reject, String text, boolean isShort){
+        Toast toast = new Toast(resolve, reject, activity, bridgeWebInterface, getUniqueInt());
+        toast.start(text, isShort);
     }
 
-    @SuppressWarnings("unused")
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCameraIntent();
-            } else {
-                bridgeWebInterface.callbackCameraFunction(false, null, PERMISSION_DENIED);
+        for(Native aNative : aNatives) {
+            if(aNative.getCode()==requestCode) {
+                aNative.onRequestPermissionsResult(permissions, grantResults);
+            }
+        }
+    }
+    public void onActivityResult(int requestCode, int resultCode, android.content.Intent data) {
+        for(Native aNative : aNatives) {
+            if(aNative.getCode()==requestCode) {
+                aNative.onActivityResult(resultCode, data);
             }
         }
     }
 
-    private void startCameraIntent(){
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        activity.startActivityForResult(cameraIntent, CAMERA_REQUEST);
-    }
-
-    @SuppressWarnings({"unused", "ConstantConditions"})
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST) {
-            if(resultCode == Activity.RESULT_OK) {
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                byte[] byteArray = byteArrayOutputStream.toByteArray();
-                String imageBase64Data = Base64.encodeToString(byteArray, Base64.NO_WRAP);
-                bridgeWebInterface.callbackCameraFunction(true, imageBase64Data, SUCCESS);
-            } else {
-                bridgeWebInterface.callbackCameraFunction(false, null, FAILED_USER_CANCELLED);
-            }
-        }
+    private int getUniqueInt() {
+        return uniqueInt++;
     }
 }
