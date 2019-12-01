@@ -28,10 +28,6 @@ public class Bridge {
         webView.evaluateJavascript(script, null);
     }
 
-    public void getWebAnswer(String script, ValueCallback<String> valueCallback) {
-        webView.evaluateJavascript(script, valueCallback);
-    }
-
     public void callback(String function) {
         sendScriptToWeb("window."+ Settings.EASYAPP_NATIVE_INTERFACE+".__private.callback."+function+";");
     }
