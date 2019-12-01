@@ -3,6 +3,7 @@ package org.hiperesp.easyapp.core.js_native_caller;
 import androidx.annotation.NonNull;
 import org.hiperesp.easyapp.MainActivity;
 import org.hiperesp.easyapp.core.js_bridge.BridgeWebInterface;
+import org.hiperesp.easyapp.core.js_bridge.Promise;
 import org.hiperesp.easyapp.core.native_functions.Camera;
 import org.hiperesp.easyapp.core.native_functions.Native;
 import org.hiperesp.easyapp.core.native_functions.Toast;
@@ -23,13 +24,13 @@ public class NativeCaller {
 
     private ArrayList<Native> aNatives = new ArrayList<Native>();
 
-    public void requestCameraPhoto(String resolve, String reject){
-        Camera camera = new Camera(resolve, reject, activity, bridgeWebInterface, getUniqueInt());
+    public void requestCameraPhoto(Promise callback){
+        Camera camera = new Camera(callback, activity, bridgeWebInterface, getUniqueInt());
         aNatives.add(camera);
         camera.start();
     }
-    public void makeToast(String resolve, String reject, String text, boolean isShort){
-        Toast toast = new Toast(resolve, reject, activity, bridgeWebInterface, getUniqueInt());
+    public void makeToast(Promise callback, String text, boolean isShort){
+        Toast toast = new Toast(callback, activity, bridgeWebInterface, getUniqueInt());
         toast.start(text, isShort);
     }
 

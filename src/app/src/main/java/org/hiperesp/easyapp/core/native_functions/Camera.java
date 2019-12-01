@@ -7,17 +7,17 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import org.hiperesp.easyapp.core.js_bridge.Bridge;
-import org.hiperesp.easyapp.core.js_native_caller.ResponseProtocolConstants;
+import org.hiperesp.easyapp.core.js_bridge.Promise;
 import java.io.ByteArrayOutputStream;
 
-public class Camera extends Native implements ResponseProtocolConstants {
+public class Camera extends Native {
 
     private String[] requestPermissions = new String[]{
             Manifest.permission.CAMERA
     };
 
-    public Camera(String callbackResolve, String callbackReject, Activity activity, Bridge bridge, int code){
-        super(activity, bridge, callbackResolve, callbackReject, code);
+    public Camera(Promise callback, Activity activity, Bridge bridge, int code){
+        super(callback, activity, bridge, code);
     }
 
     public void start(){
@@ -34,13 +34,26 @@ public class Camera extends Native implements ResponseProtocolConstants {
     }
 
     @Override
-    public void onPermissionGranted(){
+    public void onPermissionResult(String[] permissions, boolean[] results){
+        boolean granted = true;
+        for (boolean result:results) {
+            if(result) {
+                continue;
+            }
+            granted = false;
+            break;
+        }
+        if(granted) {
+            onPermissionGranted();
+        } else {
+            onPermissionDenied();
+        }
+    }
+    private void onPermissionGranted(){
         startIntent();
     }
-
-    @Override
-    public void onPermissionDenied(){
-        callback(false, null, PERMISSION_DENIED);
+    private void onPermissionDenied(){
+        reject(PERMISSION_DENIED);
     }
 
     @Override
@@ -56,21 +69,18 @@ public class Camera extends Native implements ResponseProtocolConstants {
         photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         String imageBase64Data = Base64.encodeToString(byteArray, Base64.NO_WRAP);
-        callback(true, imageBase64Data, SUCCESS);
+        resolve(imageBase64Data);
     }
 
     @Override
     public void onResultFailed(){
-        callback(false, null, FAILED_USER_CANCELLED);
+        reject(FAILED_USER_CANCELLED);
     }
 
-    private void callback(boolean success, String data, int response){
-        String callbackCall;
-        if(success) {
-            callbackCall = callbackResolve+"(\""+data+"\")";
-        } else {
-            callbackCall = callbackReject+"("+response+")";
-        }
-        callback(callbackCall);
+    private void resolve(String data){
+        promise.resolve(string(data));
+    }
+    private void reject(int errorCode){
+        promise.reject(number(errorCode));
     }
 }

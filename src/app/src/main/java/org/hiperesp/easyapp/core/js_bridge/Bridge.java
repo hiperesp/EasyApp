@@ -1,8 +1,6 @@
 package org.hiperesp.easyapp.core.js_bridge;
 
-import android.util.Log;
 import android.webkit.JavascriptInterface;
-import android.webkit.ValueCallback;
 import android.webkit.WebView;
 
 import org.hiperesp.easyapp.core.EasyApp;
@@ -28,7 +26,7 @@ public class Bridge {
         webView.evaluateJavascript(script, null);
     }
 
-    public void callback(String function) {
+    void callback(String function) {
         sendScriptToWeb("window."+ Settings.EASYAPP_NATIVE_INTERFACE+".__private.callback."+function+";");
     }
 

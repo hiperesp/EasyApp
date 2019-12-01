@@ -9,7 +9,6 @@ EasyAppNativeInterface.__private = {
         return new Promise(function(resolve, reject) {
             let callbackResolveName = EasyAppNativeInterface.__private.registerCallback(resolve);
             let callbackRejectName = EasyAppNativeInterface.__private.registerCallback(reject);
-            //action.bind(EasyAppNativeInterface)(callbackResolveName, callbackRejectName);
             action.apply(EasyAppNativeInterface, [callbackResolveName, callbackRejectName].concat(args));
         });
     }

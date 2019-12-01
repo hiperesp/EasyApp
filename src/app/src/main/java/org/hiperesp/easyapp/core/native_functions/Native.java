@@ -5,49 +5,42 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import org.hiperesp.easyapp.core.js_bridge.Bridge;
+import org.hiperesp.easyapp.core.js_bridge.Promise;
+import org.hiperesp.easyapp.core.js_bridge.PromiseUtils;
 import org.hiperesp.easyapp.core.js_native_caller.ResponseProtocolConstants;
 
-public abstract class Native implements ResponseProtocolConstants {
+public abstract class Native extends PromiseUtils implements ResponseProtocolConstants {
 
     Activity activity;
     Bridge bridge;
 
-    public String callbackResolve;
-    public String callbackReject;
+    public Promise promise;
 
     private int code;
 
-    Native(Activity activity, Bridge bridge, String resolve, String reject, int code) {
+    Native(Promise callback, Activity activity, Bridge bridge, int code) {
         this.activity = activity;
-        this.bridge = bridge;
-
-        callbackResolve = resolve;
-        callbackReject = reject;
         this.code = code;
+        this.bridge = bridge;
+        this.promise = callback;
+        this.promise.setBridge(this.bridge);
     }
 
     abstract void requestPermission();
     abstract void startIntent();
 
-    public abstract void onPermissionDenied();
-    public abstract void onPermissionGranted();
     public abstract void onResultOk(Intent data);
     public abstract void onResultFailed();
+    public abstract void onPermissionResult(String[] permissions, boolean[] grantResults);
 
     public int getCode(){ return code; }
 
     public void onRequestPermissionsResult(@NonNull String[] permissions, @NonNull int[] grantResults){
-        boolean granted = false;
-        for(int grantResult: grantResults) {
-            if(grantResult == PackageManager.PERMISSION_GRANTED) {
-                granted = true;
-            }
+        boolean grantResultsBoolean[] = new boolean[grantResults.length];
+        for(int i=0; i<grantResults.length; i++) {
+            grantResultsBoolean[i] = grantResults[i] == PackageManager.PERMISSION_GRANTED;
         }
-        if (granted) {
-            onPermissionGranted();
-        } else {
-            onPermissionDenied();
-        }
+        onPermissionResult(permissions, grantResultsBoolean);
     }
 
     public void onActivityResult(int resultCode, Intent data) {
@@ -56,13 +49,5 @@ public abstract class Native implements ResponseProtocolConstants {
         } else {
             onResultFailed();
         }
-    }
-
-    public void callback(){
-        callback(callbackResolve+"()");
-    }
-
-    public void callback(String callbackCall){
-        bridge.callback(callbackCall);
     }
 }
