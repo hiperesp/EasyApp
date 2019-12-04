@@ -1,4 +1,4 @@
-package org.hiperesp.easyapp.core.js_native_caller;
+package org.hiperesp.easyapp.core.native_functions.util;
 
 public interface ResponseProtocolConstants {
     int FAILED_USER_CANCELLED = -2;

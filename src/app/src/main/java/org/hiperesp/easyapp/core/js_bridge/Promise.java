@@ -3,19 +3,19 @@ package org.hiperesp.easyapp.core.js_bridge;
 public class Promise {
     String resolve;
     String reject;
-    Bridge bridge;
+    BridgeInternalInterface bridgeInternalInterface;
     public Promise(String resolve, String reject) {
         this.resolve = resolve;
         this.reject = reject;
     }
-    public void setBridge(Bridge bridge) {
-        this.bridge = bridge;
+    public void setBridgeInternalInterface(BridgeInternalInterface bridgeInternalInterface) {
+        this.bridgeInternalInterface = bridgeInternalInterface;
     }
     public void resolve(String...parameters) {
-        bridge.callback(resolve+parseParameters(parameters));
+        bridgeInternalInterface.callback(resolve+parseParameters(parameters));
     }
     public void reject(String...parameters) {
-        bridge.callback(reject+parseParameters(parameters));
+        bridgeInternalInterface.callback(reject+parseParameters(parameters));
     }
     private String parseParameters(String...parameters) {
         String callback = "(";

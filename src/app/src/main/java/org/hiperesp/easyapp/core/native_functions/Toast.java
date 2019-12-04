@@ -1,9 +1,8 @@
 package org.hiperesp.easyapp.core.native_functions;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Handler;
-import org.hiperesp.easyapp.core.js_bridge.Bridge;
+import org.hiperesp.easyapp.core.js_bridge.BridgeInternalInterface;
 import org.hiperesp.easyapp.core.js_bridge.Promise;
 
 public class Toast extends Native {
@@ -11,18 +10,17 @@ public class Toast extends Native {
     private String text;
     private boolean isShort;
 
-    public Toast(Promise callback, Activity activity, Bridge bridge, int code){
-        super(callback, activity, bridge, code);
+    public Toast(Promise callback, Activity activity, BridgeInternalInterface bridgeInternalInterface, int code){
+        super(callback, activity, bridgeInternalInterface, code);
     }
 
     public void start(String text, boolean isShort) {
         this.text = text;
         this.isShort = isShort;
-        startIntent();
+        showToast();
     }
 
-    @Override
-    void startIntent(){
+    public void showToast(){
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -43,23 +41,8 @@ public class Toast extends Native {
         });
     }
 
-    @Override
-    void requestPermission(){ }
-
-    @Override
-    public void onPermissionResult(String[] permissions, boolean[] results) { }
-
-    @Override
-    public void onResultOk(Intent data) {}
-
-    @Override
-    public void onResultFailed(){ }
-
     private void resolve(){
         promise.resolve();
-    }
-    private void reject(){
-        promise.reject();
     }
 
 }

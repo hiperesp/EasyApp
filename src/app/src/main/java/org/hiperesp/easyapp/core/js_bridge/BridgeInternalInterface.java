@@ -6,12 +6,12 @@ import android.webkit.WebView;
 import org.hiperesp.easyapp.core.EasyApp;
 import org.hiperesp.easyapp.core.settings.Settings;
 
-public class Bridge {
+public class BridgeInternalInterface {
 
     EasyApp easyApp;
     private WebView webView;
 
-    Bridge(EasyApp easyApp, WebView webView) {
+    BridgeInternalInterface(EasyApp easyApp, WebView webView) {
         this.easyApp = easyApp;
         this.webView = webView;
     }

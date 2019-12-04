@@ -18,9 +18,5 @@ EasyAppNativeInterface.responseProtocolConstants = {
     PERMISSION_DENIED: -1,
     SUCCESS: 0,
 }
-EasyAppNativeInterface.requestCameraPhoto = (...args) => {
-    return EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__requestCameraPhoto, args);
-}
-EasyAppNativeInterface.makeToast = (...args) => {
-    return EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__makeToast, args);
-}
+EasyAppNativeInterface.requestCameraPhoto = (...args) => EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__requestCameraPhoto, args);
+EasyAppNativeInterface.makeToast = (...args) => EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__makeToast, args);

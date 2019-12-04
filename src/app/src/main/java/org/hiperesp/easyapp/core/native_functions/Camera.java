@@ -6,18 +6,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Base64;
-import org.hiperesp.easyapp.core.js_bridge.Bridge;
+import org.hiperesp.easyapp.core.js_bridge.BridgeInternalInterface;
 import org.hiperesp.easyapp.core.js_bridge.Promise;
 import java.io.ByteArrayOutputStream;
 
-public class Camera extends Native {
+public class Camera extends Native implements NativePermission, NativeIntent {
 
-    private String[] requestPermissions = new String[]{
-            Manifest.permission.CAMERA
-    };
-
-    public Camera(Promise callback, Activity activity, Bridge bridge, int code){
-        super(callback, activity, bridge, code);
+    public Camera(Promise callback, Activity activity, BridgeInternalInterface bridgeInternalInterface, int code){
+        super(callback, activity, bridgeInternalInterface, code);
     }
 
     public void start(){
@@ -25,25 +21,17 @@ public class Camera extends Native {
     }
 
     @Override
-    void requestPermission(){
+    public void requestPermission(){
         if (activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            activity.requestPermissions(requestPermissions, getCode());
+            activity.requestPermissions(new String[]{ Manifest.permission.CAMERA}, getCode());
         } else {
             startIntent();
         }
     }
 
     @Override
-    public void onPermissionResult(String[] permissions, boolean[] results){
-        boolean granted = true;
-        for (boolean result:results) {
-            if(result) {
-                continue;
-            }
-            granted = false;
-            break;
-        }
-        if(granted) {
+    public void onPermissionResult(String[] permissions, int[] granted){
+        if(granted[0]==PackageManager.PERMISSION_GRANTED) {
             onPermissionGranted();
         } else {
             onPermissionDenied();
@@ -57,13 +45,21 @@ public class Camera extends Native {
     }
 
     @Override
-    void startIntent(){
+    public void startIntent(){
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         activity.startActivityForResult(cameraIntent, getCode());
     }
 
     @Override
-    public void onResultOk(Intent data) {
+    public void onActivityResult(int resultCode, android.content.Intent data) {
+        if(resultCode==Activity.RESULT_OK) {
+            onResultOk(data);
+        } else {
+            onResultFailed();
+        }
+    }
+
+    private void onResultOk(android.content.Intent data) {
         Bitmap photo = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -72,8 +68,7 @@ public class Camera extends Native {
         resolve(imageBase64Data);
     }
 
-    @Override
-    public void onResultFailed(){
+    private void onResultFailed(){
         reject(FAILED_USER_CANCELLED);
     }
 

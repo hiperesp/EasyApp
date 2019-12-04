@@ -5,7 +5,7 @@ import android.webkit.WebView;
 import org.hiperesp.easyapp.core.EasyApp;
 import org.hiperesp.easyapp.core.settings.Settings;
 
-public class BridgeWebInterface extends Bridge {
+public class BridgeWebInterface extends BridgeInternalInterface {
     public BridgeWebInterface(EasyApp easyApp, WebView webView) { super(easyApp, webView); }
 
     @JavascriptInterface
@@ -18,5 +18,4 @@ public class BridgeWebInterface extends Bridge {
     public void __requestCameraPhoto(String resolve, String reject){ easyApp.nativeCaller.requestCameraPhoto(new Promise(resolve, reject)); }
     @JavascriptInterface
     public void __makeToast(String resolve, String reject, String text, boolean isShort){ easyApp.nativeCaller.makeToast(new Promise(resolve, reject), text, isShort); }
-
 }
