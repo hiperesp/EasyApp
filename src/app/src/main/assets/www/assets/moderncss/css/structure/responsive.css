@@ -1,0 +1,24 @@
+/*
+ * RESPONSIVO
+ */
+
+@media (-webkit-min-device-pixel-ratio: 0) { 
+    body {
+        font-size: 1.75em;
+    }
+}
+@media (-webkit-min-device-pixel-ratio: 2) { 
+    body {
+        font-size: 1.85em;
+    }
+}
+@media (-webkit-min-device-pixel-ratio: 3) { 
+    body {
+        font-size: 2em;
+    }
+}
+@media (min-width: 1280px) {
+    .page {
+        max-width: 1280px;
+    }
+}

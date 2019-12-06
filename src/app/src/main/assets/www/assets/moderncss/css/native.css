@@ -1,0 +1,34 @@
+/*
+ * NATIVE
+ */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+a.has-focus, a:focus, a:active {
+    color: var(--link-color-active);
+}
+h1 {
+    font-size: 1em;
+}
+h2 {
+    font-size: 0.85em;
+}
+h3 {
+    font-size: 0.7em;
+}
+h4 {
+    font-size: 0.55em;
+}
+h5 {
+    font-size: 0.45em;
+}
+h6 {
+    font-size: 0.4em;
+}
+p {
+    font-size: 0.75em;
+    text-align: justify;
+    color: var(--text-color);
+}

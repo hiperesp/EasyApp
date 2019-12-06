@@ -1,6 +1,7 @@
 package org.hiperesp.easyapp.core;
 
 import android.annotation.SuppressLint;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -29,11 +30,15 @@ public class EasyApp {
     }
     private void configure(){
         webSettings = webView.getSettings();
+        enableHardwareAcceleration();
         setChromeClient();
         setWebViewClient();
         enableDebugging();
         enableFeatures();
         addJavascriptInterface();
+    }
+    private void enableHardwareAcceleration(){
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
     }
     private void setChromeClient(){
         webView.setWebChromeClient(webViewChromeClient);
@@ -44,9 +49,6 @@ public class EasyApp {
     private void addJavascriptInterface(){
         bridgeWebInterface = new BridgeWebInterface(this, webView);
         webView.addJavascriptInterface(bridgeWebInterface, Settings.EASYAPP_NATIVE_INTERFACE);
-        setPermissionManager();
-    }
-    private void setPermissionManager(){
         nativeCaller = new NativeCaller(activity, bridgeWebInterface);
     }
     @SuppressLint("SetJavaScriptEnabled")

@@ -1,0 +1,95 @@
+/*
+ * Conteúdo da página
+ */
+.page {
+    margin: 0 auto;
+    width: fit-content;
+    background-color: inherit;
+    overflow: hidden;
+    max-width: 100%;
+    min-height: 100vh;
+    transition: box-shadow 1s, transform 1s, border-radius 1s;
+}
+header, .header {
+    position: relative;
+    padding: 0.5em 0.5em 0 0.5em;
+    height: 1.5em;
+}
+.header-left, .header-right {
+    position: absolute;
+    bottom: 0;
+}
+.header-left {
+    left: 0.5em;
+}
+.header-right {
+    right: 0.5em;
+}
+main, .main {
+    padding: 0.5em 0.5em 0 0.5em;
+}
+section, .section {
+    padding: 0 0 0.5em 0;
+}
+/*.section-title {}*/
+.h-container {
+    overflow-x: auto;
+}
+.v-container {
+    overflow-y: auto;
+}
+main .h-container, .main .h-container {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+}
+.h-container > * {
+    width: max-content;
+}
+main .h-container > *, .main .h-container > * {
+    padding: 0 0.5em;
+}
+.list, .h-list {
+    list-style-type: none;
+    font-weight: bold;
+}
+.h-list li {
+    display: inline-block;
+    padding: 1em 0.4em;
+    font-size: 0.45em;
+}
+/*.h-card-list {}*/
+.card {
+    position: relative;
+    display: inline-block;
+    width: 5em;
+    height: 8em;
+    border-radius: 0.75em;
+    overflow: hidden;
+}
+.card-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--active-background);
+}
+.card-background > * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card-content {
+    position: absolute;
+    bottom: 0;
+    padding: 0 0.5em 0.75em 0.5em;
+    color: var(--active-text-color);
+    text-shadow: 0 0 0.1em var(--active-text-shadow-color);
+}
+/*article, .article {}*/
+/*.article-title {}*/
+.article-content {
+    font-size: 0.75em;
+}
+/*.article-content p {}*/
+/*.article-content img {}*/
