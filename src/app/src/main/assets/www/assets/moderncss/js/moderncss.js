@@ -46,5 +46,26 @@ function toggleLights(toggle = true, setTo = 0){
 /*
 window.addEventListener("load", function(e){
     toggleMenuView();
-});
-*/
+});*/
+function createPhoto(title, subtitle, imageAddress){
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = '<div class="card-background"><img src="'+imageAddress+'"></div><div class="card-content"><h6>'+subtitle+'</h6><h1>'+title+'</h1></div>';
+    return card;
+}
+function takePhoto() {
+    EasyAppNativeInterface.requestCameraPhoto()
+    .then((data) => {
+        const card = createPhoto("Foto", "by EasyApp", "data:image/png;base64,"+data);
+        const photoList = document.querySelector("#photoList");
+        //photoList.appendChild(card);
+        photoList.innerHTML = card.outerHTML + photoList.innerHTML;
+    })
+    .catch((error) => {
+        if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
+            alert("Você cancelou a foto :(");
+        } else if(error==EasyAppNativeInterface.responseProtocolConstants.PERMISSION_DENIED) {
+            alert("Permissão negada :(");
+        }
+    });
+}

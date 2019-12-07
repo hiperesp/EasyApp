@@ -5,36 +5,33 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 		<title>Teste de interface Mobile</title>
 		<link rel="stylesheet" type="text/css" href="assets/moderncss/css/index.css">
+		<script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceCaller.js"></script>
 		<script type="application/javascript" src="assets/moderncss/js/moderncss.js"></script>
 	</head>
 	<body>
 		<div class="sidebar">
 			<div class="v-full-container">
 				<ul class="v-list">
-					<li class="v-list-item"><div class="title">Modern CSS</div></li>
+					<li class="v-list-item title">Modern CSS</li>
+					<li class="v-list-item"><a class="link" href="javascript:void(0)" onclick="toggleMenuView()">Menu</a></li>
 					<li class="v-list-item"><a class="link" href="javascript:void(0)" onclick="toggleLights()">Luzes</a></li>
-					<li class="v-list-item"><a class="link" href="javascript:void(0)">Third Option</a></li>
-					<li class="v-list-item"><a class="link" href="javascript:void(0)">Third Option</a></li>
-					<li class="v-list-item"><a class="link" href="javascript:void(0)">Third Option</a></li>
-					<li class="v-list-item"><a class="link" href="javascript:void(0)">Third Option</a></li>
-					<li class="v-list-item"><div class="title">Modern CSS</div></li>
-					<li class="v-list-item"><a class="link" href="javascript:void(0)">Third Option</a></li>
-					<li class="v-list-item"><a class="link" href="javascript:void(0)">Third Option</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="page">
 			<header class="header">
-				<div class="header-left">
-					<div class="menu-icon">
-						<a class="link" href="javascript:void(0);" onclick="toggleMenuView();">&#9776;</a>
+				<section class="header-container">
+					<div class="header-left">
+						<div class="menu-icon">
+							<a class="link" href="javascript:void(0);" onclick="toggleMenuView();">&#9776;</a>
+						</div>
 					</div>
-				</div>
-				<div class="header-right">
-					<div class="photo">
-						<img src="assets/moderncss/img/2.png">
+					<div class="header-right">
+						<div class="photo">
+							<img src="assets/moderncss/img/2.png">
+						</div>
 					</div>
-				</div>
+				</section>
 			</header>
 			<main class="main">
 				<section class="section">
@@ -42,101 +39,19 @@
 					<div class="section-content">
 						<div class="h-full-container">
 							<ul class="h-list">
-								<li class="h-list-item"><a class="link has-focus" href="#">First Option</a></li>
-								<li class="h-list-item"><a class="link" href="#">Second Option</a></li>
-								<li class="h-list-item"><a class="link" href="#">Third Option</a></li>
+								<li class="h-list-item"><a class="link has-focus" href="javascript:void(0)">Fotos</a></li>
+								<li class="h-list-item"><a class="link" href="javascript:void(0)" onclick="takePhoto()">Tirar Foto</a></li>
 							</ul>
 						</div>
 						<div class="h-full-container">
-							<div class="h-list">
+							<div class="h-list" id="photoList">
 								<div class="card">
 									<div class="card-background">
-										<img src="https://picsum.photos/id/1/512/512">
+										<img src="assets/moderncss/img/2.png">
 									</div>
 									<div class="card-content">
 										<h6>Title of First Element</h6>
 										<h1>Big Info</h1>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/2/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Second Title</h6>
-										<h3>Second Info</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/3/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Third Title</h6>
-										<h3>Info Third</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/4/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Lorem Ipsum Title</h6>
-										<h3>Random Info</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/5/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Defined Title</h6>
-										<h3>Undefined</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/6/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Help me, please!</h6>
-										<h3>HELP ME!</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/7/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Just kidding</h6>
-										<h3>Don't Worry</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/8/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Google Translator</h6>
-										<h3>Thank You</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/9/512/512">
-									</div>
-									<div class="card-content">
-										<h6>Mas eu prefiro</h6>
-										<h3>Português</h3>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-background">
-										<img src="https://picsum.photos/id/10/512/512">
-									</div>
-									<div class="card-content">
-										<h6>&lt;h6&gt;Development&lt;/h6&gt;</h6>
-										<h3>&lt;h3&gt;In&lt;/h3&gt;</h3>
 									</div>
 								</div>
 							</div>

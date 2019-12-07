@@ -7,11 +7,8 @@
     transition: box-shadow 1s, border-radius 1s, transform 1s;
     background-color: inherit;
 }
-.page .header,
-.page .main {
-    padding: 1em 1em 0 1em;
-}
-.page .header {
+.page .header .header-container {
+    padding: 1em 0.5em 0 0.5em;
     height: 3em;
 }
 .page .header .header-left,

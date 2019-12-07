@@ -16,27 +16,25 @@
 .v-list,
 .v-list {
     height: max-content;
+    list-style-type: none;
 }
 .h-list-item {
     display: inline-block;
     padding: 1em 0.5em;
 }
 .v-list-item {
-    padding: 0.5em 1em;
+    padding: 0.5em 0;
 }
-.page .main .h-full-container {
+.h-list-item.title,
+.v-list-item.title {
+    font-size: 1.25em;
+}
+.page .main .section .h-full-container {
     margin: 0 0 0 -1em;
     width: calc(100% + 2em);
 }
-.page .main .section .h-full-container {
-    margin: 0 0 0 -2em;
-    width: calc(100% + 4em);
-}
-.page .main .h-full-container .h-list {
-    padding: 0 1em 0 1em;
-}
 .page .main .section .h-full-container .h-list {
-    padding: 0 2em 0 2em;
+    padding: 0 1em 0 1em;
 }
 .sidebar .v-full-container {
     padding: 3em 0;

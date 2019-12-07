@@ -6,12 +6,12 @@ body {
 }
 @media (-webkit-min-device-pixel-ratio: 2) { 
     body {
-        font-size: 1.1em;
+        font-size: 0.95em;
     }
 }
 @media (-webkit-min-device-pixel-ratio: 3) { 
     body {
-        font-size: 1.2em;
+        font-size: 0.9em;
     }
 }
 @media (min-width: 1280px) {

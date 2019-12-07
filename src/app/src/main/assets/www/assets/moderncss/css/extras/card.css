@@ -9,15 +9,15 @@
     height: 16em;
     border-radius: 1.5em;
     overflow: hidden;
-    border-width: 2px;
-    border-style: dashed;
-    border-color: transparent;
-    transition: border-color 0.5s;
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: var(--card-border-color);
+    transition: border-color 0.25s;
 }
 .card:hover,
 .card:active,
 .card.has-focus {
-    border-color: var(--card-border-color);
+    border-color: var(--card-border-color-2);
 }
 .card-background {
     width: 100%;
@@ -26,11 +26,18 @@
 }
 
 .card-background > * {
-
+    width: 100%;
+    height: 100%;
+}
+.card-background > img {
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .card-content {
     position: absolute;
-    padding: 0 0.5em 1em 0.5em;
+    padding: 0.5em 0.5em 1em 0.5em;
     bottom: 0;
     color: var(--card-text-color);
+    background-color: var(--card-text-background);
+    width: 100%;
 }

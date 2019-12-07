@@ -4,8 +4,7 @@
 .sidebar {
     position: absolute;
     z-index: -1;
-    padding: 0 1em 0 1em;
-    width: calc(65vw - 2em);
+    width: calc(50vw + 15vw);
     height: 100vh;
     opacity: 0;
     transition: opacity 1s;
@@ -15,9 +14,31 @@
     z-index: 0;
 }
 .sidebar .v-full-container {
-    padding: 3em 0;
+    padding: 3em 1em;
     height: calc(100vh - 6em);
 }
+@media (min-width: 1280px) {
+    .sidebar {
+        width: calc(50vw + 1280px * 0.15);
+    }
+}
+/*
+@media (min-width: 720px)  {
+    .sidebar .v-full-container .v-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 100%;
+        list-style-type: none;
+    }
+    .sidebar .v-full-container .v-list .v-list-item {
+        padding-right: 2em;
+        min-width: 10em;
+    }
+    .sidebar .v-full-container .v-list .v-next-column {
+        height: -webkit-fill-available;
+    }
+}*/
 
 /*
  * BODY MENU
