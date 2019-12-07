@@ -2,44 +2,8 @@
  * Definição padrão da página
  */
 body {
-    font-family: 'Poppins', 'Roboto', 'Roboto Slab', 'Calibri', 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Roboto', 'Roboto Slab', 'Calibri', 'Arial', 'Helvetica', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 1s, color 1s;
-}
-.page {
-    transition: background-color 1s, color 1s;
-
-}
-:root body {
-    --background-color: #ffffffff;
-    --text-color: #000000d7;
-    --link-color: #000000aa;
-    --link-color-active: #000000ff;
-
-    --active-background: linear-gradient(45deg, #ff4040ff, #ff8080ff);
-    --active-text-color: #ffffffff;
-    --active-text-shadow-color: #000000ff;
-
-    --page-shadow: #d7d7d7d7;
-}
-:root body.dark {
-    --background-color: #282828ff;
-    --text-color: #ffffffd7;
-    --link-color: #ffffffaa;
-    --link-color-active: #ffffffff;
-
-    --active-background: initial;
-
-    --page-shadow: #404040d7;
-}
-:root body.black {
-    --background-color: #000000ff;
-    --text-color: #ffffffd7;
-    --link-color: #ffffffaa;
-    --link-color-active: #ffffffff;
-
-    --active-background: initial;
-
-    --page-shadow: #404040d7;
 }

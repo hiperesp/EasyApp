@@ -3,31 +3,27 @@
  */
 .sidebar {
     position: absolute;
-    padding: 0 35vw 0 0;
-    height: 100vh;
-    width: 65vw;
     z-index: -1;
+    padding: 0 1em 0 1em;
+    width: calc(65vw - 2em);
+    height: 100vh;
     opacity: 0;
     transition: opacity 1s;
-}
-.sidebar .v-container {
-    padding: 2em 0.5em 2em 0.5em;
-    height: calc(100% - 4em);
-}
-
-
-/*
- * BODY MENU
- */
-body.menu-open {
-    overflow: hidden;
-}
-.menu-open .page {
-    box-shadow: 0 0 2em var(--page-shadow);
-    border-radius: 0.5em;
-    transform: translate(50vw) scale(0.7); /*a escala de 0.7 deixa uma borda de 0.3, equivalente a 15vw*/
 }
 .menu-open .sidebar {
     opacity: 1;
     z-index: 0;
+}
+.sidebar .v-full-container {
+    padding: 3em 0;
+    height: calc(100vh - 6em);
+}
+
+/*
+ * BODY MENU
+ */
+.menu-open .page {
+    box-shadow: 0 0 4em var(--page-shadow-color);
+    border-radius: 2em;
+    transform: translate(50%) scale(0.7);
 }

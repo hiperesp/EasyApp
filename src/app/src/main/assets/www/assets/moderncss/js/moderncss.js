@@ -8,6 +8,7 @@ function toggleMenuView(toggle = true, enable = false){
     }
     if(enable) {
         menuContainer.classList.add(menuClassName);
+        menuContainer.style.overflowX = "hidden";
         globalContainer.style.height = "100vh";
     } else {
         menuContainer.classList.remove(menuClassName);
@@ -17,6 +18,7 @@ function toggleMenuView(toggle = true, enable = false){
             globalContainer.style.height = "100vh";
         } else {
             globalContainer.style.height = "";
+            menuContainer.style.overflowX = "";
         }
     }, transitionDurationMs, globalContainer, menuContainer, menuClassName);
 }
@@ -41,3 +43,8 @@ function toggleLights(toggle = true, setTo = 0){
         body.classList.add(lightClassName[setTo]);
     }
 }
+/*
+window.addEventListener("load", function(e){
+    toggleMenuView();
+});
+*/
