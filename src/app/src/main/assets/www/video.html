@@ -7,17 +7,24 @@
         <script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceCaller.js"></script>
     </head>
     <body>
-        <video id="video" controls="" style="width: 200px;height: 200px"></video><button id="captureVideo">Capture Video</button>
+        <div id="videoContainer"></div><button id="captureVideo">Capture Video</button>
         <script>
-var video = document.querySelector("#video");
+var videoContainer = document.querySelector("#videoContainer");
 var button = document.querySelector("#captureVideo");
 button.addEventListener("click", function(e){
     EasyAppNativeInterface.requestCameraVideo()
     .then((data) => {
-        let sourceVideo = document.createElement("source");
-        sourceVideo.type = "video/mp4";
-        sourceVideo.src = data;
-        video.appendChild(sourceVideo);
+        var video = document.createElement("video");
+        video.controls = true;
+        video.style.width = "200px";
+        video.style.height = "200px";
+        {
+            var sourceVideo = document.createElement("source");
+            sourceVideo.type = "video/mp4";
+            sourceVideo.src = data;
+            video.appendChild(sourceVideo);
+        }
+        videoContainer.appendChild(video);
     })
     .catch((error) => {
         if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {

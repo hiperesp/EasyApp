@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
 import org.hiperesp.easyapp.core.js_bridge.BridgeInternalInterface;
@@ -52,7 +53,7 @@ public class Camera extends Native implements NativePermission, NativeIntent {
     }
 
     @Override
-    public void onActivityResult(int resultCode, android.content.Intent data) {
+    public void onActivityResult(int resultCode, Intent data) {
         if(resultCode==Activity.RESULT_OK) {
             onResultOk(data);
         } else {
@@ -60,7 +61,7 @@ public class Camera extends Native implements NativePermission, NativeIntent {
         }
     }
 
-    private void onResultOk(android.content.Intent data) {
+    private void onResultOk(Intent data) {
         Bitmap photo = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);

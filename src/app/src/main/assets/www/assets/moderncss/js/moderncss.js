@@ -79,13 +79,14 @@ function createPhoto(title, subtitle, imageAddress){
 }
 function createVideo(title, subtitle, videoAddress, videoType){
     const video = document.createElement("video");
-    video.controls = true;
+    //video.controls = true;
     {
-        const source = document.createElement("source");
-        source.type = videoType;
-        source.src = videoAddress;
-        video.appendChild(source);
+        const sourceVideo = document.createElement("source");
+        sourceVideo.type = videoType;
+        sourceVideo.src = videoAddress;
+        video.appendChild(sourceVideo);
     }
+    video.addEventListener("click", video.play.bind(video));
     return createCard(title, subtitle, video);
 }
 function appendFirst(node, appendTo) {

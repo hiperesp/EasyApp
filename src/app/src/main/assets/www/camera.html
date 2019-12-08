@@ -7,13 +7,20 @@
         <script type="application/javascript" src="easyapp_core/EasyAppNativeInterfaceCaller.js"></script>
     </head>
     <body>
-        <img id="photo" src=""><button id="takePhoto">Take Photo</button>
+        <div id="photoContainer"></div><button id="takePhoto">Take Photo</button>
         <script>
-var photo = document.querySelector("#photo");
+var photoContainer = document.querySelector("#photoContainer");
 var button = document.querySelector("#takePhoto");
 button.addEventListener("click", function(e){
     EasyAppNativeInterface.requestCameraPhoto()
-    .then((data) => photo.src = "data:image/png;base64,"+data)
+    .then((data) => {
+        var photo = document.createElement("img");
+        photo.style.width = "200px";
+        photo.style.height = "200px";
+        photo.style.objectFit = "contain";
+        photo.src = "data:image/png;base64,"+data;
+        photoContainer.appendChild(photo);
+    })
     .catch((error) => {
         if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
             alert("Você cancelou a foto :(");

@@ -2,9 +2,13 @@ package org.hiperesp.easyapp.core.native_functions;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.MediaStore;
+
+import androidx.core.content.MimeTypeFilter;
+
 import org.hiperesp.easyapp.core.js_bridge.BridgeInternalInterface;
 import org.hiperesp.easyapp.core.js_bridge.Promise;
 
