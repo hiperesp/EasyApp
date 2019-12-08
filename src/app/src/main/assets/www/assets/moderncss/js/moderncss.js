@@ -121,7 +121,7 @@ function captureVideo() {
     })
     .catch((error) => {
         if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
-            alert("Você cancelou a foto :(");
+            alert("Você cancelou o video :(");
         } else if(error==EasyAppNativeInterface.responseProtocolConstants.PERMISSION_DENIED) {
             alert("Permissão negada :(");
         }
