@@ -4,16 +4,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.provider.MediaStore;
-import android.util.Base64;
 import org.hiperesp.easyapp.core.js_bridge.BridgeInternalInterface;
 import org.hiperesp.easyapp.core.js_bridge.Promise;
-import java.io.ByteArrayOutputStream;
 
-public class Camera extends Native implements NativePermission, NativeIntent {
+public class Video extends Native implements NativePermission, NativeIntent {
 
-    public Camera(Promise callback, Activity activity, BridgeInternalInterface bridgeInternalInterface, int code){
+    public Video(Promise callback, Activity activity, BridgeInternalInterface bridgeInternalInterface, int code){
         super(callback, activity, bridgeInternalInterface, code);
     }
 
@@ -47,12 +44,12 @@ public class Camera extends Native implements NativePermission, NativeIntent {
 
     @Override
     public void startIntent(){
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         activity.startActivityForResult(cameraIntent, getCode());
     }
 
     @Override
-    public void onActivityResult(int resultCode, android.content.Intent data) {
+    public void onActivityResult(int resultCode, Intent data) {
         if(resultCode==Activity.RESULT_OK) {
             onResultOk(data);
         } else {
@@ -60,13 +57,8 @@ public class Camera extends Native implements NativePermission, NativeIntent {
         }
     }
 
-    private void onResultOk(android.content.Intent data) {
-        Bitmap photo = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        photo.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String imageBase64Data = Base64.encodeToString(byteArray, Base64.NO_WRAP);
-        resolve(imageBase64Data);
+    private void onResultOk(Intent data) {
+        resolve(data.getDataString());
     }
 
     private void onResultFailed(){

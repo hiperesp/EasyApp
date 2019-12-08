@@ -14,8 +14,8 @@
     z-index: 0;
 }
 .sidebar .v-full-container {
-    padding: 3em 1em;
-    height: calc(100vh - 6em);
+    padding: 4em 1em 3em 1em;
+    height: calc(100vh - 7em);
 }
 @media (min-width: 1280px) {
     .sidebar {

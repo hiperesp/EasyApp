@@ -9,6 +9,7 @@ import org.hiperesp.easyapp.core.native_functions.Native;
 import org.hiperesp.easyapp.core.native_functions.NativeIntent;
 import org.hiperesp.easyapp.core.native_functions.NativePermission;
 import org.hiperesp.easyapp.core.native_functions.Toast;
+import org.hiperesp.easyapp.core.native_functions.Video;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,13 @@ public class NativeCaller {
         nativesPermission.add(camera);
         nativesIntent.add(camera);
         camera.start();
+    }
+
+    public void requestCameraVideo(Promise callback) {
+        Video video = new Video(callback, activity, bridgeWebInterface, getUniqueInt());
+        nativesPermission.add(video);
+        nativesIntent.add(video);
+        video.start();
     }
 
     public void makeToast(Promise callback, String text, boolean isShort){

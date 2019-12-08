@@ -46,11 +46,18 @@ function toggleLights(toggle = true, setTo = 0){
 /*
 window.addEventListener("load", function(e){
     toggleMenuView();
-});*/
+});
+*/
 function createPhoto(title, subtitle, imageAddress){
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML = '<div class="card-background"><img src="'+imageAddress+'"></div><div class="card-content"><h6>'+subtitle+'</h6><h1>'+title+'</h1></div>';
+    return card;
+}
+function createVideo(title, subtitle, videoAddress){
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = '<div class="card-background"><video controls=""><source type="video/mp4" src="'+videoAddress+'"></video></div><div class="card-content"><h6>'+subtitle+'</h6><h1>'+title+'</h1></div>';
     return card;
 }
 function takePhoto() {
@@ -59,7 +66,23 @@ function takePhoto() {
         const card = createPhoto("Foto", "by EasyApp", "data:image/png;base64,"+data);
         const photoList = document.querySelector("#photoList");
         //photoList.appendChild(card);
-        photoList.innerHTML = card.outerHTML + photoList.innerHTML;
+        photoList.innerHTML = card.outerHTML + " " + photoList.innerHTML;
+    })
+    .catch((error) => {
+        if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
+            alert("Você cancelou a foto :(");
+        } else if(error==EasyAppNativeInterface.responseProtocolConstants.PERMISSION_DENIED) {
+            alert("Permissão negada :(");
+        }
+    });
+}
+function captureVideo() {
+    EasyAppNativeInterface.requestCameraVideo()
+    .then((data) => {
+        const card = createVideo("Video", "by EasyApp", data);
+        const photoList = document.querySelector("#photoList");
+        //photoList.appendChild(card);
+        photoList.innerHTML = card.outerHTML + " " + photoList.innerHTML;
     })
     .catch((error) => {
         if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {

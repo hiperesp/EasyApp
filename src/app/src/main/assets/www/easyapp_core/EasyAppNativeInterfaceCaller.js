@@ -19,4 +19,5 @@ EasyAppNativeInterface.responseProtocolConstants = {
     SUCCESS: 0,
 }
 EasyAppNativeInterface.requestCameraPhoto = (...args) => EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__requestCameraPhoto, args);
+EasyAppNativeInterface.requestCameraVideo = (...args) => EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__requestCameraVideo, args);
 EasyAppNativeInterface.makeToast = (...args) => EasyAppNativeInterface.__private.nativePromiseCall(EasyAppNativeInterface.__makeToast, args);
