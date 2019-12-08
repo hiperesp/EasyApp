@@ -48,25 +48,60 @@ window.addEventListener("load", function(e){
     toggleMenuView();
 });
 */
+function createCard(title, subtitle, background) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    {
+        const cardBackground = document.createElement("div");
+        cardBackground.classList.add("card-background");
+        cardBackground.appendChild(background);
+        card.appendChild(cardBackground);
+
+        const cardContent = document.createElement("div");
+        cardContent.classList.add("card-content");
+        {
+            const cardSubtitle = document.createElement("h6");
+            cardSubtitle.textContent = subtitle;
+            cardContent.appendChild(cardSubtitle);
+
+            const cardTitle = document.createElement("h1");
+            cardTitle.textContent = title;
+            cardContent.appendChild(cardTitle);
+        }
+        card.appendChild(cardContent);
+    }
+    return card;
+}
 function createPhoto(title, subtitle, imageAddress){
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = '<div class="card-background"><img src="'+imageAddress+'"></div><div class="card-content"><h6>'+subtitle+'</h6><h1>'+title+'</h1></div>';
-    return card;
+    const image = document.createElement("img");
+    image.src = imageAddress;
+    return createCard(title, subtitle, image);
 }
-function createVideo(title, subtitle, videoAddress){
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = '<div class="card-background"><video controls=""><source type="video/mp4" src="'+videoAddress+'"></video></div><div class="card-content"><h6>'+subtitle+'</h6><h1>'+title+'</h1></div>';
-    return card;
+function createVideo(title, subtitle, videoAddress, videoType){
+    const video = document.createElement("video");
+    video.controls = true;
+    {
+        const source = document.createElement("source");
+        source.type = videoType;
+        source.src = videoAddress;
+        video.appendChild(source);
+    }
+    return createCard(title, subtitle, video);
 }
+function appendFirst(node, appendTo) {
+    appendTo.appendChild(node);
+    while(appendTo.firstChild!=node) {
+        appendTo.appendChild(appendTo.firstChild);
+    }
+}
+
 function takePhoto() {
     EasyAppNativeInterface.requestCameraPhoto()
     .then((data) => {
-        const card = createPhoto("Foto", "by EasyApp", "data:image/png;base64,"+data);
-        const photoList = document.querySelector("#photoList");
-        //photoList.appendChild(card);
-        photoList.innerHTML = card.outerHTML + " " + photoList.innerHTML;
+        const mediaList = document.querySelector("#mediaList");
+        const photo = createPhoto("Foto", "by EasyApp", "data:image/png;base64,"+data);
+        appendFirst(document.createTextNode(" "), mediaList);
+        appendFirst(photo, mediaList);
     })
     .catch((error) => {
         if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
@@ -79,10 +114,10 @@ function takePhoto() {
 function captureVideo() {
     EasyAppNativeInterface.requestCameraVideo()
     .then((data) => {
-        const card = createVideo("Video", "by EasyApp", data);
-        const photoList = document.querySelector("#photoList");
-        //photoList.appendChild(card);
-        photoList.innerHTML = card.outerHTML + " " + photoList.innerHTML;
+        const mediaList = document.querySelector("#mediaList");
+        const video = createVideo("Vídeo", "by EasyApp", data, "video/mp4");
+        appendFirst(document.createTextNode(" "), mediaList);
+        appendFirst(video, mediaList);
     })
     .catch((error) => {
         if(error==EasyAppNativeInterface.responseProtocolConstants.FAILED_USER_CANCELLED) {
