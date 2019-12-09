@@ -1,0 +1,43 @@
+Adicionar funções javascript que:
+ - retorna a presença de conexão com a internet
+ - fecha o App
+ - minimiza o App (deixar aberto em segundo plano)
+ - abre outros Apps
+ - obtém fotos e vídeos da galeria
+ - muda a cor da barra de status em tempo de execução
+ - muda a cor da barra de navegação em tempo de execução
+ - alterna os modos do app:
+    - navbar presente, statusbar presente
+    - navbar presente, status bar oculta
+    - navbar oculta, statusbar presente
+    - navbar oculta, statusbar oculta
+ - liga a lanterna
+ - chama uma autenticação por impressão digital (android 8-) / leitura biométrica (android 9+)
+ - envia notificações (com ou sem resposta)
+ - envia diálogos (com ou sem resposta)
+
+Resolver bugs:
+ - aumentar qualidade das fotos do requestCameraPhoto
+ - não salvar vídeos do requestCameraVideo na galeria
+ - desativar o reset do app quando alterna a tela dividida
+
+Funcionalidades para implementar:
+ - adicionar "abrir com" de acordo com algumas paginas web acessadas
+ - criar protocolo para abrir o app através da chamada de algum site aberto no navegador
+ - injetar o EasyAppNativeInterfaceCaller automaticamente
+ - renomar o objeto principal "EasyAppNativeInterface" para outro nome mais curto (poderia ser
+                    Android, mas não faz sentido, já que o código será literalmente o mesmo para
+                    a versão web.)
+ - deixar o objeto principal readonly
+ - renomear alguns métodos padrão para facilitar o entendimento
+ - criar settings.xml para "substituir" o Settings.java (a classe Settings lê o settings.xml)
+ - desativar a navegação em outros sites por regex, similar a:
+                    <allowedPages>/(.*)/</allowedPages>
+                    (regex padrão pra permitir todos os sites))
+ - testar diálogos padrão da webview e alterar eles de acordo com a necessidade, como:
+    - alert, confirm, prompt (alterar para o dialog padrão do android)
+    - testar dialog de file e similares para verificar a necessidade de alterar
+
+Funcionalidades externas para implementar:
+ - Criar versão web (talvez com modo simulador)
+ - Criar algo similar a "phpmyadmin" para administrar a webdb (ou verificar se existe algum na internet)
