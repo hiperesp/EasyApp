@@ -11,7 +11,7 @@
     --card-text-background: #ffffffb7;
     --card-text-color: #000000ff;
 
-    --page-shadow-color: var(--text-color);
+    --page-shadow-color: #d7d7d7ff;
 }
 :root body.dark {
     --background-color: #282828ff;
@@ -23,6 +23,8 @@
     --card-border-color: #d7d7d740;
     --card-border-color-2: #d7d7d780;
     --card-text-color: #0000009f;
+
+    --page-shadow-color: #404040ff;
 }
 :root body.black {
     --background-color: #000000ff;
@@ -34,4 +36,6 @@
     --card-border-color: #ffffff40;
     --card-border-color-2: #ffffff80;
     --card-text-color: #0000009f;
+
+    --page-shadow-color: #282828ff;
 }

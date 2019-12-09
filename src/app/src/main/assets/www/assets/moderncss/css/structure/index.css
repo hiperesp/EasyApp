@@ -1,4 +1,5 @@
-@import url('page.css');
-@import url('extras.css');
+@import url('page/index.css');
 @import url('menu.css');
 @import url('responsive.css');
+@import url('list.css');
+@import url('extras.css');

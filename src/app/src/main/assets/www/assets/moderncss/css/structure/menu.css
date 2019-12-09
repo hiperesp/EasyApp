@@ -44,7 +44,7 @@
  * BODY MENU
  */
 .menu-open .page {
-    box-shadow: 0 0 4em var(--page-shadow-color);
+    box-shadow: 0 0 2em var(--page-shadow-color);
     border-radius: 2em;
     transform: translate(50%) scale(0.7);
 }
