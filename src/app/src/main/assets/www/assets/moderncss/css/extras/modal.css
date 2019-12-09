@@ -1,0 +1,26 @@
+/*
+ * MODAL
+ */
+.modal-container {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000080;
+}
+.modal {
+    margin: 4em auto;
+    background-color: #dfdfdfff;
+    width: fit-content;
+    max-width: 80vw;
+    height: fit-content;
+    max-height: calc(100vh - 8em);
+    border-radius: 2em;
+    box-shadow: 0 0 4em var(--page-shadow-color);
+}
+.modal-main-content {
+    height: calc(100vh - 12em);
+    overflow-y: auto;
+}
