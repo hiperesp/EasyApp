@@ -3,16 +3,16 @@ let cardContainer;
 function loadHandler(e){
     cardContainer = document.querySelector("#card-list");
 }
-function createCard(cardContentData, cardBackgroundData){
+function createCard(cardContentDataVector, cardBackgroundData){
     let card = document.createElement("div");
     card.classList.add("card");
     let cardBackground = document.createElement("div");
     cardBackground.classList.add("card-background");
-    for(let i=0; i<cardBackgroundData.length; i++) cardBackground.appendChild(cardBackgroundData[i]);
+    cardBackground.appendChild(cardBackgroundData);
     card.appendChild(cardBackground);
     let cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
-    for(let i=0; i<cardContentData.lenght; i++) cardContent.appendChild(cardContentData[i]);
+    for(let i=0; i<cardContentDataVector.length; i++) cardContent.appendChild(cardContentDataVector[i]);
     card.appendChild(cardContent);
     return card;
 }
@@ -51,14 +51,14 @@ function createVideoCard(title, subtitle, videoSource){
     source.src = videoSource;
     video.appendChild(source);
     let cardContent = createCardTitleSubtitle(title, subtitle);
-    let cardBackground = [video];
+    let cardBackground = video;
     return createCard(cardContent, cardBackground);
 }
 function createImageCard(title, subtitle, imageSource){
     let image = document.createElement("img");
     image.src = imageSource;
     let cardContent = createCardTitleSubtitle(title, subtitle);
-    let cardBackground = [image];
+    let cardBackground = image;
     return createCard(cardContent, cardBackground);
 }
 function appendFirst(container, content){
