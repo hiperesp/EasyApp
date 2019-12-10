@@ -4,17 +4,13 @@ Adicionar funções javascript que:
  - minimiza o App (deixar aberto em segundo plano)
  - abre outros Apps
  - obtém fotos e vídeos da galeria
- - muda a cor da barra de status em tempo de execução
- - muda a cor da barra de navegação em tempo de execução
- - alterna os modos do app:
-    - navbar presente, statusbar presente
-    - navbar presente, status bar oculta
-    - navbar oculta, statusbar presente
-    - navbar oculta, statusbar oculta
+ - muda a cor da barra de status e barra de navegação em tempo de execução
+ - alterna os modos do app navbar presente/oculta, statusbar presente/oculta
  - liga a lanterna
  - chama uma autenticação por impressão digital (android 8-) / leitura biométrica (android 9+)
  - envia notificações (com ou sem resposta)
  - envia diálogos (com ou sem resposta)
+ - força a rotação da tela (portrait, landscape, auto)
 
 Resolver bugs:
  - aumentar qualidade das fotos do requestCameraPhoto
@@ -37,6 +33,10 @@ Funcionalidades para implementar:
  - testar diálogos padrão da webview e alterar eles de acordo com a necessidade, como:
     - alert, confirm, prompt (alterar para o dialog padrão do android)
     - testar dialog de file e similares para verificar a necessidade de alterar
+ - adicionar algumas opções padrão das chamadas javascript no arquivo de configurações, como:
+    - rotação padrão da tela
+    - cor da barra de status e barra de navegação
+    - modos do app (navbar presente/oculta, statusbar presente/oculta)
 
 Funcionalidades externas para implementar:
  - Criar versão web (talvez com modo simulador)
