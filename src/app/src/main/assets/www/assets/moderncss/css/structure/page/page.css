@@ -1,9 +1,0 @@
-/*
- * PAGE
- */
-.page {
-    overflow: hidden;
-    margin: 0 auto;
-    transition: box-shadow 1s, border-radius 1s, transform 1s;
-    background-color: inherit;
-}

@@ -15,16 +15,14 @@ Adicionar funções javascript que:
 Resolver bugs:
  - aumentar qualidade das fotos do requestCameraPhoto
  - não salvar vídeos do requestCameraVideo na galeria
- - desativar o reset do app quando alterna a tela dividida
+ - desativar o reset do app quando alterna entre os modos da tela dividida
 
 Funcionalidades para implementar:
  - adicionar "abrir com" de acordo com algumas paginas web acessadas
  - criar protocolo para abrir o app através da chamada de algum site aberto no navegador
  - injetar o EasyAppNativeInterfaceCaller automaticamente
- - renomar o objeto principal "EasyAppNativeInterface" para outro nome mais curto (poderia ser
-                    Android, mas não faz sentido, já que o código será literalmente o mesmo para
-                    a versão web.)
- - deixar o objeto principal readonly
+ - renomear o objeto principal "EasyAppNativeInterface" para outro nome mais curto (talvez somente "Native")
+ - deixar o objeto principal "EasyAppNativeInterface" readonly
  - renomear alguns métodos padrão para facilitar o entendimento
  - criar settings.xml para "substituir" o Settings.java (a classe Settings lê o settings.xml)
  - desativar a navegação em outros sites por regex, similar a:
@@ -40,4 +38,3 @@ Funcionalidades para implementar:
 
 Funcionalidades externas para implementar:
  - Criar versão web (talvez com modo simulador)
- - Criar algo similar a "phpmyadmin" para administrar a webdb (ou verificar se existe algum na internet)
